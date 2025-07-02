@@ -1,0 +1,38 @@
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    restart: always	
+    depends_on:
+      - skylineglobeserver
+    ports:
+      - "8443:443"    # External 8443 maps to internal NGINX HTTPS port 443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    networks:
+      - skyline_network
+
+  skylineglobeserver:
+    image: skylineglobe/skylineglobeserver:latest
+    container_name: skylineglobeserver_container
+    restart: always	
+    expose:
+      - "5155" # Expose for internal use
+    environment:
+      SGS__ServerConfig__CatalogDBType: SQLite
+      SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
+      SGS__ServerConfig__PublicUrl: https://sgs.localhost:8443
+      SGS__ServerConfig__LicenseServerURL: ""
+      SGS__Kestrel__Endpoints__Http__Url: http://0.0.0.0:5155
+    volumes:
+      - ./data:/app/data 
+      - ./config:/app/config 
+    networks:
+      - skyline_network
+
+networks:
+  skyline_network:
+    driver: bridge
+

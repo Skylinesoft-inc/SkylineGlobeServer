@@ -1,0 +1,22 @@
+services:
+
+  skylineglobeserver:
+    image: skylineglobe/skylineglobeserver:latest
+    container_name: skylineglobeserver_container
+    restart: always	
+    ports:
+      - "5000:5155" # Adjust according to your app's exposed port
+    environment:
+      SGS__ServerConfig__CatalogDBType: SQLite
+      SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
+      SGS__ServerConfig__PublicUrl: http://localhost:5000
+      SGS__ServerConfig__LicenseServerURL: ""
+    volumes:
+      - ./data:/app/data 
+      - ./config:/app/config 
+    networks:
+      - skyline_network
+
+networks:
+  skyline_network:
+    driver: bridge

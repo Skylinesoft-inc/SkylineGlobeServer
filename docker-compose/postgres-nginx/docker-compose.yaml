@@ -1,0 +1,61 @@
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    restart: always	
+    depends_on:
+      - skylineglobeserver
+    ports:
+      - "8443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    networks:
+      - skyline_network
+
+  postgres:
+    image: postgis/postgis:latest
+    container_name: postgres_for_sgs
+    restart: always	
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - skyline_network
+
+  skylineglobeserver:
+    image: skylineglobe/skylineglobeserver:latest
+    container_name: skylineglobeserver_container
+    restart: always	
+    depends_on:
+      - postgres
+    expose:
+      - "5155"
+    environment:
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+      SGS__ServerConfig__CatalogDBType: PostgreSQL
+      SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
+      SGS__ServerConfig__CatalogPostgreSqlConnString: server=postgres;port=5432;database={0};user id=postgres;password=postgres;
+      SGS__ServerConfig__PublicUrl: https://sgs.localhost:8443
+      SGS__ServerConfig__LicenseServerURL: ""
+      SGS__Kestrel__Endpoints__Http__Url: http://0.0.0.0:5155
+      SGS__AllowedHosts: "*"
+    volumes:
+      - ./data:/app/data 
+      - ./config:/app/config
+    networks:
+      - skyline_network
+
+networks:
+  skyline_network:
+    driver: bridge
+

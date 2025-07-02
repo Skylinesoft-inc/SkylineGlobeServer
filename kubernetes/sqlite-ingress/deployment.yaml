@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sgs-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sgs-app
+  template:
+    metadata:
+      labels:
+        app: sgs-app
+    spec:
+      imagePullSecrets:
+        - name: my-dockerhub-secret
+      containers:
+        - name: sgs-app
+          image: skylineglobe/skylineglobeserver:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5155
+          env:
+            - name: SGS__ServerConfig__CatalogDBType
+              value: SQLite
+            - name: SGS__ServerConfig__SharedDataPath
+              value: /app/data
+            - name: SGS__ServerConfig__PublicUrl
+              value: https://sgs.localhost
+            - name: SGS__ServerConfig__LicenseServerURL
+              value: ""
+            - name: SGS__Kestrel__Endpoints__Http__Url
+              value: http://0.0.0.0:5155
+            - name: SGS__AllowedHosts
+              value: "*"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+            - name: data-volume
+              mountPath: /app/data
+      volumes:
+        - name: config-volume
+          hostPath:
+            path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/config"
+        - name: data-volume
+          hostPath:
+            path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/data"
+
