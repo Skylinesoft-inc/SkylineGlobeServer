@@ -16,7 +16,7 @@ services:
 
   skylineglobeserver:
     image: skylineglobe/skylineglobeserver:latest
-    container_name: skylineglobeserver_container
+    container_name: skylineglobeserver
     restart: always	
     expose:
       - "5155" # Expose for internal use

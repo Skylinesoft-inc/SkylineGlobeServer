@@ -28,13 +28,20 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
       - skyline_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      retries: 20
+      start_period: 30s
+      timeout: 10s
 
   skylineglobeserver:
     image: skylineglobe/skylineglobeserver:latest
-    container_name: skylineglobeserver_container
+    container_name: skylineglobeserver
     restart: always	
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     expose:
       - "5155"
     environment:
@@ -58,4 +65,3 @@ services:
 networks:
   skyline_network:
     driver: bridge
-
