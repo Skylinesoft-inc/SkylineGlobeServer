@@ -34,6 +34,21 @@ spec:
               mountPath: /app/config
             - name: data-volume
               mountPath: /app/data
+              
+            # -----------------------------------------------------
+            # Option 1: Mount a subfolder (keeps the original /app/tef/custom contents)                 
+            # -----------------------------------------------------
+            - name: more-data-volume
+              mountPath: /app/tef/custom/more-data
+
+            # -----------------------------------------------------
+            # Option 2: Mount a single file (adds/replaces one file).
+            # The "readOnly: true" field is the equivalent of ":ro" in Docker.
+            # -----------------------------------------------------
+            - name: custom-file-volume
+              mountPath: /app/tef/custom/my-config.json
+              subPath: my-config.json
+              readOnly: true          
       volumes:
         - name: config-volume
           hostPath:
@@ -41,4 +56,18 @@ spec:
         - name: data-volume
           hostPath:
             path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/localhost_sqlite/data"
+            
+        # -----------------------------------------------------
+        # Option 1: Host folder to mount as a subfolder inside the container
+        # -----------------------------------------------------
+        #- name: more-data-volume
+        #  hostPath:
+        #    path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/localhost_sqlite/more-data"
+
+        # -----------------------------------------------------
+        # Option 2: Host file to mount as read-only
+        # -----------------------------------------------------
+        #- name: custom-file-volume
+        #  hostPath:
+        #    path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/localhost_sqlite/custom/myconfig.json"
 
