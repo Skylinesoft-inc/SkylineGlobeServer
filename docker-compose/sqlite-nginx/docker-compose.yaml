@@ -3,30 +3,30 @@ services:
   nginx:
     image: nginx:latest
     container_name: nginx_proxy
-    restart: always	
+    restart: always 
     depends_on:
       - skylineglobeserver
     ports:
       - "8443:443"    # External 8443 maps to internal NGINX HTTPS port 443
-    volumes:
+    volumes:  # Mount local folders for data persistence
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/certs:/etc/nginx/certs:ro
     networks:
       - skyline_network
 
   skylineglobeserver:
-    image: skylineglobe/skylineglobeserver:latest
+    image: skylineglobe/skylineglobeserver:latest # Docker image to use
     container_name: skylineglobeserver
-    restart: always	
+    restart: always 
     expose:
       - "5155" # Expose for internal use
-    environment:
+    environment:   # Configure SGS
       SGS__ServerConfig__CatalogDBType: SQLite
       SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
       SGS__ServerConfig__PublicUrl: https://sgs.localhost:8443
       SGS__ServerConfig__LicenseServerURL: ""
       SGS__Kestrel__Endpoints__Http__Url: http://0.0.0.0:5155
-    volumes:
+    volumes:  # Mount local folders for data persistence
       - ./data:/app/data 
       - ./config:/app/config 
       # Option 1: Mount a subfolder (keeps the original /app/tef/custom contents)      
