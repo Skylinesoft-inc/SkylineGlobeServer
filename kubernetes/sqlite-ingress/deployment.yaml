@@ -56,21 +56,21 @@ spec:
       volumes:
         - name: config-volume
           hostPath:
-            path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/config"
+            path: "/run/desktop/mnt/host/c/sgs/config"
         - name: data-volume
           hostPath:
-            path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/data"
+            path: "/run/desktop/mnt/host/c/sgs/data"
 	    
         # -----------------------------------------------------
         # Option 1: Host folder to mount as a subfolder inside the container
         # -----------------------------------------------------
         #- name: more-data-volume
         #  hostPath:
-        #    path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/more-data"
+        #    path: "/run/desktop/mnt/host/c/sgs/more-data"
 
         # -----------------------------------------------------
         # Option 2: Host file to mount as read-only
         # -----------------------------------------------------
         #- name: custom-file-volume
         #  hostPath:
-        #    path: "/run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_sqlite/custom/myconfig.json"
+        #    path: "/run/desktop/mnt/host/c/sgs/custom/myconfig.json"

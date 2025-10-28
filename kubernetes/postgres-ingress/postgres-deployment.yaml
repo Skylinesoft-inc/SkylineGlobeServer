@@ -30,6 +30,6 @@ spec:
       volumes:
         - name: pgdata
           hostPath:
-            path: /run/desktop/mnt/host/c/Users/Administrator/Desktop/K8S/https_postgres/postgres_data
+            path: /run/desktop/mnt/host/c/sgs/postgres_data
             type: DirectoryOrCreate
 			
