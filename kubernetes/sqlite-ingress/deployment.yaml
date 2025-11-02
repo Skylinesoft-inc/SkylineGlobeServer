@@ -42,17 +42,17 @@ spec:
             # -----------------------------------------------------
             # Option 1: Mount a subfolder (keeps the original /app/tef/custom contents)                 
             # -----------------------------------------------------
-            - name: more-data-volume
-              mountPath: /app/tef/custom/more-data
+            #- name: more-data-volume
+            #  mountPath: /app/tef/custom/more-data
 	      
             # -----------------------------------------------------
             # Option 2: Mount a single file (adds/replaces one file).
             # The "readOnly: true" field is the equivalent of ":ro" in Docker.
             # -----------------------------------------------------
-            - name: custom-file-volume
-              mountPath: /app/tef/custom/my-config.json
-              subPath: my-config.json
-              readOnly: true          
+            #- name: custom-file-volume
+            #  mountPath: /app/tef/custom/my-config.json
+            #  subPath: my-config.json
+            #  readOnly: true          
       volumes:
         - name: config-volume
           hostPath:
