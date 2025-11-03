@@ -66,4 +66,3 @@ spec:
         #- name: custom-file-volume
         #  hostPath:
         #    path: "/run/desktop/mnt/host/c/sgs/custom/myconfig.json"
-

@@ -31,5 +31,4 @@ spec:
         - name: pgdata
           hostPath:
             path: /run/desktop/mnt/host/c/sgs/postgres_data
-            type: DirectoryOrCreate
-			
+            type: DirectoryOrCreate			

@@ -1,5 +1,4 @@
 services:
-
   skylineglobeserver:
     image: skylineglobe/skylineglobeserver:latest # Docker image to use
     container_name: skylineglobeserver_container
