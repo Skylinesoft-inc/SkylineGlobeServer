@@ -39,14 +39,12 @@ spec:
             - name: config-volume
               mountPath: /app/config
             - name: data-volume
-              mountPath: /app/data
-	      
+              mountPath: /app/data	      
             # -----------------------------------------------------
             # Option 1: Mount a subfolder (keeps the original /app/tef/custom contents)                 
             # -----------------------------------------------------
             #- name: more-data-volume
-            #  mountPath: /app/tef/custom/more-data
-	      
+            #  mountPath: /app/tef/custom/more-data	 
             # -----------------------------------------------------
             # Option 2: Mount a single file (adds/replaces one file).
             # The "readOnly: true" field is the equivalent of ":ro" in Docker.
@@ -61,15 +59,13 @@ spec:
             path: "/run/desktop/mnt/host/c/sgs/config"
         - name: data-volume
           hostPath:
-            path: "/run/desktop/mnt/host/c/sgs/data"
-	    
+            path: "/run/desktop/mnt/host/c/sgs/data"	    
         # -----------------------------------------------------
         # Option 1: Host folder to mount as a subfolder inside the container
         # -----------------------------------------------------
         #- name: more-data-volume
         #  hostPath:
-        #    path: "/run/desktop/mnt/host/c/sgs/more-data"
-        
+        #    path: "/run/desktop/mnt/host/c/sgs/more-data"        
         # -----------------------------------------------------
         # Option 2: Host file to mount as read-only
         # -----------------------------------------------------
