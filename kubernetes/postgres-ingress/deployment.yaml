@@ -24,7 +24,7 @@ spec:
             - name: SGS__ServerConfig__CatalogDBType
               value: PostgreSQL
             - name: SGS__ServerConfig__CatalogPostgreSqlConnString
-              value: server=postgres;port=5432;database={0};user id=postgres;password=postgres;              
+              value: server=postgres;port=5432;user id=postgres;password=postgres;              
             - name: SGS__ServerConfig__SharedDataPath
               value: /app/data
             - name: SGS__ServerConfig__PublicUrl
