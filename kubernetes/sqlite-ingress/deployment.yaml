@@ -25,8 +25,6 @@ spec:
               value: SQLite
             - name: SGS__ServerConfig__SharedDataPath
               value: /app/data
-            - name: SGS__ServerConfig__PublicUrl
-              value: https://sgs.localhost
             - name: SGS__ServerConfig__LicenseServerURL
               value: ""
             - name: SGS__Kestrel__Endpoints__Http__Url

@@ -22,7 +22,6 @@ services:
     environment:   # Configure SGS
       SGS__ServerConfig__CatalogDBType: SQLite
       SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
-      SGS__ServerConfig__PublicUrl: https://sgs.localhost:8443
       SGS__ServerConfig__LicenseServerURL: ""
       SGS__Kestrel__Endpoints__Http__Url: http://0.0.0.0:5155
     volumes:  # Mount local folders for data persistence

@@ -52,7 +52,6 @@ services:
       SGS__ServerConfig__CatalogDBType: PostgreSQL
       SGS__ServerConfig__SharedDataPath: /app/data/SkylineGlobeServerConfiguration    
       SGS__ServerConfig__CatalogPostgreSqlConnString: server=postgres;port=5432;user id=postgres;password=postgres;
-      SGS__ServerConfig__PublicUrl: https://sgs.localhost:8443
       SGS__ServerConfig__LicenseServerURL: ""
       SGS__Kestrel__Endpoints__Http__Url: http://0.0.0.0:5155
       SGS__AllowedHosts: "*"
